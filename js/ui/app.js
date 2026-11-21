@@ -110,10 +110,14 @@
     const text = App.store.exportText();
     U.download('marginalia-' + U.slug(who ? who.name : 'diary') + '-' + U.today() + '.json', text);
     App.store.markExported();
-    App.ui.toast('Backup downloaded. Keep it somewhere you trust.', 'ok');
+    App.ui.toast('Backup downloaded. Put it in a folder that syncs, like OneDrive.', 'ok');
   }
 
   function importBackup(file) {
+    const held = App.store.meta().entries.length;
+    const who = App.profiles.current();
+    if (held && !window.confirm('Import replaces the ' + U.plural(held, 'entry') + ' already in \u201c' +
+      (who ? who.name : 'this diary') + '\u201d with what is in this file. Continue?')) return;
     const reader = new FileReader();
     reader.onload = function () {
       const res = App.store.importText(String(reader.result));
@@ -126,7 +130,8 @@
 
   function aboutPanel() {
     const html = '<p class="lead">A diary first, a recommender second. Everything lives in this browser.</p>' +
-      '<h3>Where the data is</h3><p>Each diary you name gets its own slot in <code>localStorage</code> on this machine, for this browser profile. Nothing is shared between them, and a new one starts empty. Clearing site data deletes everything, so use <em>Export a backup</em> before you switch browsers or machines. Restore by importing the same file into the diary you want it in \u2014 it replaces what is there.</p>' +
+      '<h3>Where the data is</h3><p>Each diary you name gets its own slot in <code>localStorage</code> on this machine, for this browser profile. Nothing is shared between them, and a new one starts empty. Clearing site data deletes everything, so use <em>Export a backup</em> before you switch browsers or machines &mdash; and keep it somewhere that survives: save the file into a folder that already syncs, OneDrive or Dropbox, and treat that as the copy you trust. Restore by importing the same file into the diary you want it in &mdash; it replaces what is there. Two devices hold two diaries until one imports the other&rsquo;s file, so export before you stop working and import where you resume.</p>' +
+      '<h3>One address</h3><p>The diary lives wherever you open it from, per browser. If you use the hosted page, use <em>that</em> address on every device; entries made while opening the local folder are stored separately from entries made on the hosted page. The same goes for a private window, which forgets the shelf when you close it.</p>' +
       '<h3>Several people, one browser</h3><p>The name in the top bar is the diary you are writing in. <em>Switch diary</em> goes back to the picker. These are separate shelves, not accounts: anyone using this browser can open any of them, and there is no password because a password stored in the page would be as readable as the entries. For anything you truly want private, keep your own browser profile and export your own backups.</p>' +
       '<h3>Chinese titles, names and notes</h3><p>Any field accepts Chinese. Write \u6d3b\u7740 as the title and <em>To Live</em> as the original title, or the other way round \u2014 both show up and both are searchable. Tags can be Chinese too (\u8bb0\u5fc6, \u57ce\u5e02), and a credit line may use a Chinese role: <code>\u5bfc\u6f14: \u5f20\u827a\u8b00</code>. Sort order is pinyin-aware, so one shelf can hold \u4e09\u4f53 next to <i>Blade Runner</i>.</p>' +
       '<h3>How the suggestions work</h3><p>Three purely local calculations, in order of trust:</p><ul>' +
