@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marginalia — a diary of books, films &amp; series</title>
+<meta name="description" content="A local-first diary of the books you read, the films you watched and the series you kept up with, with suggestions on where to dig deeper.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%238c4a3a'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Georgia,serif' fill='%23f7f3ec' text-anchor='middle'%3E%C2%B6%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<a class="skip-link" href="#view">Skip to content</a>
+
+<header class="masthead">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">&para;</span>
+    <div class="brand-text">
+      <h1>Marginalia</h1>
+      <p class="tagline">what you read, what you watched, where to dig next</p>
+    </div>
+  </div>
+
+  <nav class="tabs" id="tabs" aria-label="Sections">
+    <a href="#/diary" data-route="diary">Diary</a>
+    <a href="#/library" data-route="library">Library</a>
+    <a href="#/delve" data-route="delve">Delve</a>
+    <a href="#/patterns" data-route="patterns">Patterns</a>
+  </nav>
+
+  <div class="head-tools">
+    <button type="button" class="who-chip" id="btn-who" title="Switch diary" hidden>
+      <span class="who-mark" id="who-mark" aria-hidden="true"></span>
+      <span class="who-name" id="who-name"></span>
+    </button>
+    <button type="button" class="btn btn-primary" id="btn-log" title="Log something (press N)">Log an entry</button>
+    <button type="button" class="btn btn-ghost" id="btn-menu" aria-haspopup="true" aria-expanded="false" aria-label="Menu">&#8943;</button>
+    <div class="menu" id="menu" role="menu" hidden>
+      <button type="button" role="menuitem" data-menu="switch">Switch diary</button>
+      <hr>
+      <button type="button" role="menuitem" data-menu="export">Export a backup</button>
+      <button type="button" role="menuitem" data-menu="import">Import from backup</button>
+      <hr>
+      <button type="button" role="menuitem" data-menu="sample">Load sample entries</button>
+      <button type="button" role="menuitem" data-menu="wipe" class="danger">Delete every entry</button>
+      <button type="button" role="menuitem" data-menu="forget" class="danger">Delete this diary</button>
+      <hr>
+      <button type="button" role="menuitem" data-menu="about">How this works</button>
+    </div>
+  </div>
+</header>
+
+<main id="view" class="view" tabindex="-1"></main>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-heading" hidden></aside>
+<input type="file" id="file-input" accept="application/json,.json" hidden>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<footer class="colophon" id="colophon"></footer>
+
+<script src="js/core.js"></script>
+<script src="js/data/ladder.js"></script>
+<script src="js/data/seed.js"></script>
+<script src="js/data/profiles.js"></script>
+<script src="js/data/store.js"></script>
+<script src="js/data/enrich.js"></script>
+<script src="js/reco/profile.js"></script>
+<script src="js/reco/related.js"></script>
+<script src="js/reco/delve.js"></script>
+<script src="js/ui/parts.js"></script>
+<script src="js/ui/people.js"></script>
+<script src="js/ui/entry.js"></script>
+<script src="js/ui/quickadd.js"></script>
+<script src="js/ui/diary.js"></script>
+<script src="js/ui/library.js"></script>
+<script src="js/ui/delve.js"></script>
+<script src="js/ui/patterns.js"></script>
+<script src="js/ui/app.js"></script>
+</body>
+</html>
